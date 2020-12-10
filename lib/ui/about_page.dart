@@ -9,7 +9,7 @@ class AboutPage extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        child: Text("Developer : vinod.yadav940@gmail.com"),
+        child: Text("Flutter Developer : vinod.yadav940@gmail.com"),
       ),
     );
   }

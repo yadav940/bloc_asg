@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     articleBloc = BlocProvider.of<ArticleBloc>(context);
     articleBloc.add(FetchArticlesEvent());
   }
+  int totalCount=0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +59,42 @@ class _HomePageState extends State<HomePage> {
                       } else if (state is ArticleLoadingState) {
                         return buildLoading();
                       } else if (state is ArticleLoadedState) {
-                        return buildArticleList(state.articles);
+                        return buildArticleList(state.articles,totalCount);
                       } else if (state is ArticleErrorState) {
                         return buildErrorUi(state.message);
                       }
                     },
                   ),
                 ),
+              ),
+              floatingActionButton: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FloatingActionButton(
+                    onPressed: () {
+                      totalCount=2;
+                      articleBloc.add(FetchArticlesEvent());
+                    },
+                    child: Text('A'),
+                    backgroundColor: Colors.green,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      totalCount=3;
+                      articleBloc.add(FetchArticlesEvent());
+                    },
+                    child: Text('B'),
+                    backgroundColor: Colors.green,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {
+                      totalCount=0;
+                      articleBloc.add(FetchArticlesEvent());
+                    },
+                    child: Text('C'),
+                    backgroundColor: Colors.green,
+                  )
+                ],
               ),
 
             ),
@@ -92,9 +122,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildArticleList(List<Articles> articles) {
+  Widget buildArticleList(List<Articles> articles,int totalCount) {
     return ListView.builder(
-      itemCount: articles.length,
+      itemCount: totalCount==0?articles.length:totalCount,
       itemBuilder: (ctx, pos) {
         return Padding(
           padding: const EdgeInsets.all(8.0),

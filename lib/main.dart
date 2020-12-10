@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TestAss',
+      title: 'Vinod ass',
       home: BlocProvider(
         builder: (context) => ArticleBloc(repository: ArticleRepositoryImpl()),
         child: HomePage(),
